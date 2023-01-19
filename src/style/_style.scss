@@ -12,9 +12,10 @@ html {
 body {
   min-width: 320px;
   min-height: 100vh;
-  font-family: Arial, sans-serif;
+  font-family: Inter, sans-serif;
   background-color: $second-color;
-  color: $main-color
+  color: $main-color;
+  font-weight: 400;
 }
 
 
@@ -28,6 +29,7 @@ svg {
 
 
 button {
+  display: block;
   padding: 0;
   cursor: pointer;
   background-color: transparent;
@@ -69,17 +71,38 @@ iframe {
 }
 
 
-/*
-Пример контейнера
-
-Если контейнер 1180px по макету,
-то для max-width прибавляем паддинги 30px*2, 
-в итоге 1240px
-Чтобы контент не прижимался к краям экрана
-*/
 
 .container {
-  max-width: 1240px;
-  padding: 0 30px;
+  --max-width: 1180px;
+  --padding: 30px;
+  max-width: calc(var(--max-width) + var(--padding) * 2);
+  padding: 0 var(--padding);
   margin: 0 auto;
+
+
+  @include laptop {
+    --max-width: 880px;
+  }
+  
+  @include tablet {
+    --max-width: 620px;
+
+  }
+
+  @include mobile {
+    --padding: 15px;
+  }
+
+}
+
+main {
+  margin-bottom: 120px;
+
+  @include tablet {
+    margin-bottom: 80px;
+  }
+
+  @include mobile {
+    margin-bottom: 60px;
+  }
 }
