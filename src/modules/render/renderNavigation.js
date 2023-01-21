@@ -41,14 +41,15 @@ export const renderNavigation = (gender) => {
       })
   };
 
-  const categoryElements = dataNavigation[gender].list.map((item) => 
-  
-    createElement('li', 
+  const categoryElements = dataNavigation[gender].list.map((item) =>
+    createElement(
+      'li', 
       {
         className: 'category__item',
       },
       {
-        append: createElement('a', 
+        append: createElement(
+          'a', 
           {
             className: 'category__link',
             textContent: item.title,
@@ -65,14 +66,12 @@ export const renderNavigation = (gender) => {
               })
             }
           }
-        ),     
-      }
+        )
+      }    
     )
+  );
     
-  )
-
-
-  createElement ('ul', 
+  createElement('ul', 
     {
       className: 'navigation__category category',
     },
