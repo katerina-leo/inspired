@@ -1,15 +1,17 @@
 import './index.html';
 import './index.scss';
+import { categoryPage } from './modules/categoryPage';
+
 import { API_URL, DATA } from './modules/const';
 import { createCssColors } from './modules/createCssColors';
 import { createElement } from './modules/createElement';
 import { getData } from './modules/getData';
 import { mainPage } from './modules/mainPage/mainPage';
-import { menMainPage } from './modules/mainPage/menMainPage';
-import { womenMainPage } from './modules/mainPage/womenMainPage';
+
 import { renderFooter } from './modules/render/renderFooter';
 import { renderHeader } from './modules/render/renderHeader';
 import { router } from './modules/router';
+
 
 const init = async () => {
   try {
@@ -30,10 +32,16 @@ const init = async () => {
     });
 
     router.on('women', () => {
-      womenMainPage();
+      mainPage('women');
     });
     router.on('men', () => {
-      menMainPage();
+      mainPage('men');
+    });
+
+    router.on('/:gender/:category', categoryPage);
+
+    router.on('search', (data) => {
+      console.log(data.params.value)
     });
 
       // setTimeout(() => {
@@ -47,6 +55,7 @@ const init = async () => {
     
 
   } catch(e) {
+    console.warn(e)
     createElement('h2', {
       textContent: "Что-то пошло не так, поробуйте позже..."
     }, 
