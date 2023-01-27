@@ -1,12 +1,14 @@
 import { API_URL, COUNT_PAGINATION, DATA } from "../const";
-import { createElement } from "../createElement";
+import { createElement } from "../utils/createElement";
 
 import { getData } from "../getData";
 import { renderPagination } from "./renderPagination";
+import { products } from "../elems";
+import { getFavorite } from "../controllers/favoriteController";
 
 export const renderProducts = async (title, params) => {
   
-  const products = document.querySelector('.goods');
+  
   products.textContent = "";
 
   const data = await getData(`${API_URL}/api/goods`, params);
@@ -22,7 +24,7 @@ export const renderProducts = async (title, params) => {
     }
   );
 
-  createElement('h2', {
+  const titleElem = createElement('h2', {
     className: 'goods__title',
     textContent: title,
   },
@@ -30,6 +32,30 @@ export const renderProducts = async (title, params) => {
     parent: container,
   }
   );
+
+  if(Object.hasOwn(data, 'totalCount')) {
+    createElement ('sup', {
+      className: 'goods__title-sup',
+      innerHTML: `&nbsp(${data?.totalCount})`,
+    },
+    {
+      parent: titleElem,
+    });
+
+    if (!data.totalCount) {
+      createElement ('p', 
+      {
+        className: 'goods__warning',
+        textContent: 'По вашему запросу ничего не найдено',
+      },
+      {parent: container},)
+
+      return;
+    }
+  }
+
+  const favoriteList = getFavorite();
+  console.log(favoriteList)
 
   const listCard = goods.map((product) => {
     
@@ -49,7 +75,7 @@ export const renderProducts = async (title, params) => {
                 </a>
                 <div class="product__row">
                   <p class="product__price">руб ${product.price}</p>
-                  <button class="product__btn-favorite" 
+                  <button class="product__btn-favorite favorite ${favoriteList.includes(product.id) ? 'favorite_active' : ''}" 
                     aria-label="добавить в избранное" 
                     data-id=${product.id}>
                   </button>

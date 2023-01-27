@@ -1,48 +1,54 @@
 import './index.html';
 import './index.scss';
-import { categoryPage } from './modules/categoryPage';
+
 
 import { API_URL, DATA } from './modules/const';
 import { createCssColors } from './modules/createCssColors';
-import { createElement } from './modules/createElement';
+import { createElement } from './modules/utils/createElement';
 import { getData } from './modules/getData';
-import { mainPage } from './modules/mainPage/mainPage';
+import { mainPage, mainPageController } from './modules/controllers/mainPageController';
 
 import { renderFooter } from './modules/render/renderFooter';
 import { renderHeader } from './modules/render/renderHeader';
-import { router } from './modules/router';
+import { router } from './modules/utils/router';
+import { categoryPageController } from './modules/controllers/categoryPageController';
+import { searchPageController } from './modules/controllers/searchController';
+import { main } from './modules/elems';
+import { favoritePageController } from './modules/controllers/favoriteController';
 
 
 const init = async () => {
   try {
+
+    DATA.navigation = await getData(`${API_URL}/api/categories`);
+    DATA.colors = await getData(`${API_URL}/api/colors`);
+
     router.on('*', () => {
       renderHeader();
       renderFooter();
     });
-
-    DATA.navigation = await getData(`${API_URL}/api/categories`);
-    DATA.colors = await getData(`${API_URL}/api/colors`);
 
     createCssColors(DATA.colors)
 
     
 
     router.on('/', () => {
-      mainPage();
+      mainPageController();
     });
 
     router.on('women', () => {
-      mainPage('women');
+      mainPageController('women');
     });
     router.on('men', () => {
-      mainPage('men');
+      mainPageController('men');
     });
 
-    router.on('/:gender/:category', categoryPage);
+    router.on('/:gender/:category', categoryPageController);
 
-    router.on('search', (data) => {
-      console.log(data.params.value)
-    });
+    router.on('search', searchPageController);
+
+    router.on('favorite', favoritePageController);
+
 
       // setTimeout(() => {
     //   router.navigate('men');
@@ -60,7 +66,11 @@ const init = async () => {
       textContent: "Что-то пошло не так, поробуйте позже..."
     }, 
     {
-      parent: 'main'
+      parent: main,
+      cb(h2) {
+        h2.style.textAlign = 'center';
+        h2.style.color = 'red';
+      }
     })
 
   } finally {
