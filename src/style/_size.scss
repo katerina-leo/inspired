@@ -9,6 +9,10 @@
     text-transform: uppercase;
   }
 
+  &__input {
+    position: absolute;
+  }
+  
   &__input:checked + &__check {
     background-color: $main-color;
     color: $second-color;
