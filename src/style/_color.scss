@@ -3,6 +3,7 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
+  display: block;
 
   &_check {
     border: 0.4px solid $gray;
@@ -19,18 +20,12 @@
     border-radius: 50%;
   }
 
-  // &_red:after {
-  //   background-color: red;
-  // }
-  
-  // &_white:after {
-  //   background-color: white;
-  //   border: 1px solid $main-color;
-  // }
-
-  // &_black:after{
-  //   background-color: black;
-  // }
-
+  &__input:checked + &__check {
+    position: absolute;
+    inset: 0;
+    display: block;
+    border: 0.4px solid $gray;
+    border-radius: 50%;
+  }
 
 }

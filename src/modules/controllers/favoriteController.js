@@ -1,4 +1,5 @@
 import { products } from "../elems";
+import { renderCard } from "../render/renderCard";
 import { renderHero } from "../render/renderHero";
 import { renderNavigation } from "../render/renderNavigation";
 import { renderProducts } from "../render/renderProducts";
@@ -26,25 +27,28 @@ export const removeFavorite = (id) => {
 
 };
 
-products.addEventListener('click', (e) => {
+export const handlerFavorite = (e) => {
   const target = e.target;
   if(target.closest('.favorite_active')) {
     removeFavorite(target.dataset.id)
     target.classList.remove('favorite_active');
-    console.log(getFavorite)
+    
     return;
   }
 
   if(target.closest('.favorite')) {
     addFavorite(target.dataset.id)
     target.classList.add('favorite_active');
-    console.log(getFavorite)
+  
     return;
   }
-})
+};
+
+products.addEventListener('click', handlerFavorite)
 
 export const favoritePageController = () => {
   renderNavigation('all');
   renderHero(false);
+  renderCard(false);
   renderProducts('Избранное', {list: getFavorite()});
-}
+};

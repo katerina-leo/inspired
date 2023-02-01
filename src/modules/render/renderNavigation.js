@@ -5,23 +5,23 @@ import { createElement } from "../utils/createElement.js";
 let flag = false;
 let oldGender = 'women';
 
-export const renderNavigation = (gender, category) => {
-  
 
+export const renderNavigation = (gender, category) => {
   if (!gender) {
     navigation.style.display = 'none';
   } else {
     navigation.style.display = '';
   }
 
-  if(flag && oldGender === gender) {
+  if (flag && oldGender === gender) {
     return;
   }
 
-  if(oldGender === "women") {
-    gender = oldGender
+  if (gender === "all") {
+    gender = oldGender;
   }
-  oldGender === gender
+
+  oldGender = gender;
   flag = true;
   
   navigation.textContent = "";

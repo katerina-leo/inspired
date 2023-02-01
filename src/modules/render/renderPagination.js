@@ -3,9 +3,6 @@ import { getUrl } from "../utils/getUrl";
 import { router } from "../utils/router";
 
 export const renderPagination = (wrapperPagination, page, pages, count) => {
-  
-  
-  
   wrapperPagination.textContent = '';
 
   createElement('ul',

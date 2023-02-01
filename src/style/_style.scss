@@ -61,16 +61,20 @@ iframe {
   border: none;
 }
 
-/*
-Доступно скрываю элементы
-*/
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
 
 .visually-hidden {
   position: fixed;
   transform: scale(0);
 }
 
-
+.input-hide {
+  appearance: none;
+}
 
 .container {
   --max-width: 1180px;

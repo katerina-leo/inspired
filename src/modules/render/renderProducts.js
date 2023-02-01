@@ -55,7 +55,7 @@ export const renderProducts = async (title, params) => {
   }
 
   const favoriteList = getFavorite();
-  console.log(favoriteList)
+  
 
   const listCard = goods.map((product) => {
     

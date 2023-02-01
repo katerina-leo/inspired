@@ -5,13 +5,11 @@ export const getUrl = (params) => {
 
   let url = currentLocation.url;
   
-
   const searchParams = new URLSearchParams(currentLocation.queryString);
   
   for (const keys in params) {
     searchParams.set(keys, params[keys]);
   }
-  
 
   url += `?${searchParams.toString()}`;
   return url;
