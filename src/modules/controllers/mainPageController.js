@@ -1,12 +1,15 @@
 import { renderCard } from "../render/renderCard";
-import { renderHero } from "../render/renderHero"
-import { renderNavigation } from "../render/renderNavigation"
-import { renderProducts } from "../render/renderProducts"
+import { renderCart } from "../render/renderCart";
+import { renderHero } from "../render/renderHero";
+import { renderNavigation } from "../render/renderNavigation";
+import { renderOrder } from "../render/renderOrder";
+import { renderProducts } from "../render/renderProducts";
 
-export const mainPageController = (gender = 'women') => {
-  
-renderNavigation(gender);
-renderHero(gender);
-renderCard(false);
-renderProducts('Новинки', {gender});
-}
+export const mainPageController = (gender = "women") => {
+  renderNavigation({ gender, render: true });
+  renderHero({ gender, render: true });
+  renderCard({ render: false });
+  renderProducts({ title: "Новинки", params: { gender }, render: true });
+  renderCart({ render: false });
+  renderOrder({ render: false });
+};
