@@ -1,58 +1,61 @@
-import { countController } from "../controllers/countController"
+import { countController } from "../controllers/countController";
 import { createElement } from "../utils/createElement";
 
-export const renderCount = () => {
-  const control = createElement('div', 
-    {
-      className: 'card__count count',
-    });
+export const renderCount = (count, className, returnCount = () => {}) => {
+  const control = createElement("div", {
+    className: `${className} count`,
+  });
 
-  const minus = createElement('button',
+  const minus = createElement(
+    "button",
     {
-      className: 'count__item count__minus',
-      type: 'button',
-      textContent: '-',
+      className: "count__item count__minus",
+      type: "button",
+      textContent: "-",
     },
     {
       parent: control,
     }
-  )
+  );
 
-  const number = createElement('span',
+  const number = createElement(
+    "span",
     {
-      className: 'count__item count__number',
-      textContent: '1',
+      className: "count__item count__number",
+      textContent: count,
     },
     {
       parent: control,
     }
-  )
+  );
 
-  const plus = createElement('button',
+  const plus = createElement(
+    "button",
     {
-      className: 'count__item count__plus',
-      type: 'button',
-      textContent: '+',
+      className: "count__item count__plus",
+      type: "button",
+      textContent: "+",
     },
     {
       parent: control,
     }
-  )
+  );
 
-  const input = createElement('input',
+  const input = createElement(
+    "input",
     {
-      type: 'hidden',
-      value: '1',
-      name: 'count'
+      type: "hidden",
+      value: count,
+      name: "count",
     },
     {
       parent: control,
     }
-  )
+  );
 
-  countController(minus, number, plus, input);
+  countController(minus, number, plus, input, returnCount);
   return control;
-}
+};
 /*
 <div class="card__count count">
               <button class="count__item count__minus">-</button>
