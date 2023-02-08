@@ -56,11 +56,3 @@ export const renderCount = (count, className, returnCount = () => {}) => {
   countController(minus, number, plus, input, returnCount);
   return control;
 };
-/*
-<div class="card__count count">
-              <button class="count__item count__minus">-</button>
-              <span class="count__item count__number">1</span>
-              <button class="count__item count__plus">+</button>
-              <input type="hidden" name="count" value="1">
-            </div>
-*/
