@@ -109,7 +109,8 @@ export const renderCart = ({ render, cartGoodsStore }) => {
             const isRemove = removeCart(product);
             if (isRemove) {
               li.remove();
-              calcTotalPrice.update();
+              calcTotalPrice.updateTotalPrice();
+              calcTotalPrice.updateCount();
             }
           });
         },
@@ -119,7 +120,8 @@ export const renderCart = ({ render, cartGoodsStore }) => {
     const countBlock = renderCount(product.count, "item__count", (count) => {
       product.count = count;
       addProductCart(product, true);
-      calcTotalPrice.update();
+      calcTotalPrice.updateTotalPrice();
+      calcTotalPrice.updateCount();
     });
     article.insertAdjacentElement("beforeend", countBlock);
   });
@@ -148,7 +150,7 @@ export const renderCart = ({ render, cartGoodsStore }) => {
         {},
         {
           cb(elem) {
-            calcTotalPrice.update();
+            calcTotalPrice.updateTotalPrice();
             calcTotalPrice.writeTotal(elem);
           },
         }
@@ -156,14 +158,3 @@ export const renderCart = ({ render, cartGoodsStore }) => {
     }
   );
 };
-
-/*
-
-
-  <div class="count item__count">
-                    <button class="count__item count__minus">-</button>
-                    <span class="count__item count__number">1</span>
-                    <button class="count__item count__plus">+</button>
-                    <input type="hidden" name="count" value="1" />
-                  </div>
-*/
